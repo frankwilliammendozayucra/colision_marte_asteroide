@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Simulación interactiva WebGL 2.0 de Marte y la pérdida de agua: hidrosfera activa, impacto cataclísmico, onda de choque planetaria y desertificación total.">
+    <title>Marte y el Agua — Simulación WebGL 2.0</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Lienzo de renderizado WebGL 2.0 de pantalla completa -->
+    <canvas id="glCanvas"></canvas>
+
+    <!-- ======== HUD (Heads-Up Display) - Panel translúcido ======== -->
+    <div class="hud-panel">
+        <h1>Marte y el Agua</h1>
+        <p class="subtitle">
+            Pipeline 3D nativo WebGL 2.0 • Cráter y onda de choque en vertex shader •
+            Océanos primitivos, impacto cataclísmico y evaporación total del agua.
+        </p>
+
+        <!-- Indicador de fase actual -->
+        <div class="status-box">
+            <div class="phase-label">Fase de la Simulación</div>
+            <div class="phase-value" id="phaseText">Fase 1: Marte Primitivo (Hidrosfera Activa)</div>
+        </div>
+
+        <!-- Indicador de porcentaje de agua superficial -->
+        <div class="meter-container">
+            <div class="meter-header">
+                <span>Agua Superficial Restante</span>
+                <span id="waterPercentText">100.0%</span>
+            </div>
+            <div class="meter-bar-bg">
+                <div class="meter-bar-fill" id="waterBar"></div>
+            </div>
+        </div>
+
+        <!-- Indicador de la biosfera / zonas verdes -->
+        <div class="meter-container">
+            <div class="meter-header">
+                <span>Zonas Verdes (Biosfera)</span>
+                <span id="bioPercentText">100.0%</span>
+            </div>
+            <div class="meter-bar-bg">
+                <div class="meter-bar-green" id="bioBar"></div>
+            </div>
+        </div>
+
+        <!-- Botones de control -->
+        <div class="controls">
+            <button id="btnPlayPause">Pausar</button>
+            <button id="btnImpactMoment">Ver Colisión</button>
+            <button id="btnReset">Reiniciar</button>
+        </div>
+
+        <!-- Instrucciones interactivas -->
+        <div class="instructions">
+            <strong>Controles Interactivos:</strong><br>
+            • <b>Arrastrar clic izquierdo:</b> Rotar cámara orbital (&theta;, &phi;)<br>
+            • <b>Rueda del ratón:</b> Zoom In / Out<br>
+            • <b>"Ver Colisión":</b> Salto directo al instante del impacto<br>
+            • <b>"Reiniciar":</b> Volver a Marte primitivo con 100% de agua
+        </div>
+    </div>
+
+    <!-- ================================================================
+         CARGA DE MÓDULOS EN ORDEN DE DEPENDENCIAS
+         ================================================================ -->
+
+    <!-- 1. Módulos Matemáticos -->
+    <script src="js/math/Vector3.js"></script>
+    <script src="js/math/Matrix4.js"></script>
+    <script src="js/math/Noise3D.js"></script>
+
+    <!-- 2. Cámaras y Controles Orbitales -->
+    <script src="js/cameras/PerspectiveCamera.js"></script>
+    <script src="js/cameras/OrbitControls.js"></script>
+
+    <!-- 3. Núcleo WebGL -->
+    <script src="js/core/ShaderProgram.js"></script>
+    <script src="js/core/Geometry.js"></script>
+    <script src="js/core/Object3D.js"></script>
+
+    <!-- 4. Geometrías Paramétricas -->
+    <script src="js/geometries/SphereGeometry.js"></script>
+    <script src="js/geometries/AsteroidGeometry.js"></script>
+    <script src="js/geometries/DiscRingGeometry.js"></script>
+
+    <!-- 5. Materiales y Shaders GLSL ES 3.00 -->
+    <script src="js/materials/MarsCrackMaterial.js"></script>
+    <script src="js/materials/VolumetricParticleMaterial.js"></script>
+
+    <!-- 6. Objetos de Escena y Efectos -->
+    <script src="js/objects/Mesh.js"></script>
+    <script src="js/objects/ParticleSystem.js"></script>
+    <script src="js/objects/BallisticEjecta.js"></script>
+    <script src="js/objects/CosmicBackground.js"></script>
+
+    <!-- 7. Simulación, Escena y Renderizador -->
+    <script src="js/simulation/ImpactStateMachine.js"></script>
+    <script src="js/core/Scene.js"></script>
+    <script src="js/core/Renderer.js"></script>
+
+    <!-- 8. Punto de Entrada Principal -->
+    <script src="js/main.js"></script>
+</body>
+</html>
